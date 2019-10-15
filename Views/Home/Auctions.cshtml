@@ -1,0 +1,43 @@
+@{
+    int i = 0;
+}
+<h1>Current Auctions</h1>
+<div class="text-left">
+    <table class="table-bordered" style="width: 800px;">
+        <thead>
+            <tr>
+                <td>Product</td>
+                <td>Seller</td>
+                <td>Top Bid</td>
+                <td>Time Remaining</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in @ViewBag.AllAuctions)
+           {
+               <tr>
+                   <td><a href="/Display/@item.AuctionId">@item.ProductName</a></td>
+                   <td>@item.Users[0].User.FirstName</td>
+                   <td>@item.Bid $</td>
+                   <td>@ViewBag.Days[i]</td>
+                   @{
+                       i++;
+                   }
+                   <td>
+                       @if(item.Users[0].User.EmailReg == @ViewBag.Email){
+                           <a href="/Delete/@item.Users[0].User.UserId/@item.AuctionId">Delete</a>
+                       }
+                   </td>
+               </tr>
+           }
+        </tbody>
+    </table>
+    <div class="row" style="margin-left: 5px; margin-top: 20px;">
+        <a href="/newauction">Add Auction</a>
+    </div>
+
+    <div class="row" style="margin-left: 5px; margin-top: 20px;">
+        <h4>Current balance: @ViewBag.CurrentBalance $</h4>
+    </div>
+</div>

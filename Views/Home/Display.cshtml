@@ -1,0 +1,21 @@
+@model Auction
+
+<h1>@Model.ProductName</h1>
+<h4>Created by: @ViewBag.Name</h2>
+<h5>Day Remaining: @ViewBag.Days days</h3>
+<br>
+<p>@Model.Description</p>
+<div class="row">
+    <div class="col">
+        <p>Current Highest Bid:</p>
+        <P>@Model.Bid</P>
+    </div>
+    <div class="col">
+        <p>By @ViewBag.Bidder</p>
+        <form action="/AddBid" method="post">
+            <input type="number" name="CurrentBid">
+            <input type="hidden" name="Id" value="@Model.AuctionId">
+            <input type="submit" value="Bid">
+        </form>
+    </div>
+</div>
